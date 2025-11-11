@@ -57,7 +57,8 @@ public class TestPicture17
     
      //how many pixels or how large array
     System.out.println("This is a large array"+pixels.length  );
-
+    temple1.explore();
+    bMark.explore();
 
     /**/
         //access each index, arrray note
@@ -126,8 +127,58 @@ public class TestPicture17
         blue = spot3.getBlue();
         red = (red + 50);
         green = (green + 50);
+        blue = (blue + 50);
+        spot3.setBlue(blue);
+        spot3.setRed(red);
+        spot3.setGreen(green);
     }
- 
+    temple1.explore();
+    for (Pixel spot3 : pixels5)
+    {
+        red = spot3.getRed();
+        green = spot3.getGreen();
+        blue = spot3.getBlue();
+        red = (red - 50);
+        green = (green - 50);
+        blue = (blue - 50);
+        spot3.setBlue(blue);
+        spot3.setRed(red);
+        spot3.setGreen(green);
+    }
+    temple1.explore();
+    // for (Pixel spot4 : pixels3)
+    // {
+        // red = spot4.getRed();
+        // green = spot4.getGreen();
+        // blue = spot4.getBlue();
+        // if ((blue >= 20) && (red < 30))
+        // {
+          // red = (red + 250);
+        // green = (green - 250);
+        // blue = (blue - 250);
+        // spot4.setBlue(blue);
+        // spot4.setRed(red);
+        // spot4.setGreen(green);  
+        // }
+    // }
+    //bMark.explore();
+    for (Pixel spot4 : pixels3)
+    {
+        red = spot4.getRed();
+        green = spot4.getGreen();
+        blue = spot4.getBlue();
+        if ((red >= 80) && (green >= 70) && (blue < 130));
+        {
+          red = (int)(red * 0.5);
+          green = (int)(green * .25);
+          blue = (int)(blue * 1.5);
+          spot4.setBlue(blue);
+          spot4.setRed(red);
+          spot4.setGreen(green);  
+        }
+    }
+    bMark.explore();
+    //ferris1.write("images/SFTry1.jpg");
 
  /**
   * Method to clear red from picture
