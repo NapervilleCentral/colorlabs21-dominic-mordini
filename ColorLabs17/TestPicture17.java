@@ -146,28 +146,25 @@ public class TestPicture17
         spot3.setGreen(green);
     }
     temple1.explore();
-    // for (Pixel spot4 : pixels3)
-    // {
-        // red = spot4.getRed();
-        // green = spot4.getGreen();
-        // blue = spot4.getBlue();
-        // if ((blue >= 20) && (red < 30))
-        // {
-          // red = (red + 250);
-        // green = (green - 250);
-        // blue = (blue - 250);
-        // spot4.setBlue(blue);
-        // spot4.setRed(red);
-        // spot4.setGreen(green);  
-        // }
-    // }
-    //bMark.explore();
     for (Pixel spot4 : pixels3)
     {
         red = spot4.getRed();
         green = spot4.getGreen();
         blue = spot4.getBlue();
-        if ((red >= 80) && (green >= 70) && (blue < 130));
+        red = (250 - red);
+        blue = (250 - blue);
+        green = (250 - green);
+        spot4.setBlue(blue);
+          spot4.setRed(red);
+          spot4.setGreen(green);
+    }
+    bMark.explore();
+    for (Pixel spot4 : pixels3)
+    {
+        red = spot4.getRed();
+        green = spot4.getGreen();
+        blue = spot4.getBlue();
+        if ((red > 80) && (green >= 50) && (blue < 130))
         {
           red = (int)(red * 0.5);
           green = (int)(green * .25);

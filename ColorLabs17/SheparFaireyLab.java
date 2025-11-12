@@ -1,50 +1,221 @@
 
 /**
- * Write a description of class SheparFaireyLab here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Kevin Hayes
+ * Test Picture Classes
+ *
+ * @author (Kevin Hayes)
+ * @version (10-19-2016)
  */
-import java.awt.*;
+import java.util.Random;
+import java.awt.*;// the color class in awt library
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
-
 public class SheparFaireyLab
 {
+
     /**
      * main method, to test the picture
-     *  
+     *
      */
-    public static void main(String[] args)
-    {
-        
-         //opens selfie picture 
-          /**/
-         String fileName = FileChooser.pickAFile();
-         Picture pictObj = new Picture(fileName);
-         pictObj.explore();
-         
-         //relative path
-         Picture apic = new Picture("images\\beach.jpg");
-         //change with selfie picture
-         Picture me = new Picture("images/beach.jpg");
-         Picture me1 = new Picture("images/beach.jpg");
-         Picture me2 = new Picture("images/beach.jpg");
-         
-         /**
-          * method 1 change
-          * 
-          */
-         
-         /**
-          * method 2 change
-          * 
-          */
-         
-         /**
-          * custom color palette
-          */
+  public static void main(String[] args)
+  {
+    //opens picture using a dialog box
+      /**/
+     // String fileName = FileChooser.pickAFile();
+     // Picture pictObj = new Picture(fileName);
+     // pictObj.explore();
 
-         
-    }//main       
+     //opens a pictue using a path
+     //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
+     
+     //Know it, Love it, Live it!!!!!!!!!!
+     //relative path               dir/folder/file
+     
+     Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
+     Picture selfie = new Picture("images/selfie.jpg");
+    
+
+     //!!!!!!!! Displays the picture
+     
+    
+     
+     //makes an array of pixels
+     Pixel[] pixels;
+     Pixel[] pixels2;
+    
+     //gets pixels from picture and assigns to pixels array
+     pixels = ferris1.getPixels();
+     pixels2 = selfie.getPixels();
+    
+    
+     //how many pixels or how large array
+    System.out.println("This is a large array"+pixels.length  );
+    ferris1.explore();
+    selfie.ex
+
+    /**/
+        //access each index, arrray note
+    // System.out.println(pixels[17]);
+    // //access each pixel pic.methods.getPixel
+    // Pixel spot = ferris1.getPixel(100,100);
+    // Pixel spot50 = ferris1.getPixel(50,50);
+    // Color lesteel = new Color(176,196,222);
+    
+    
+    // System.out.println(pixels[17].getColor());
+    // System.out.println(spot);
+    
+    // Pixel spot17 = pixels[17];
+    // spot17.setRed(200);
+    // spot17.setBlue(150);
+    // spot17.setGreen(175);
+    // ferris1.explore();
+    
+    // spot.setColor(Color.yellow);
+    // ferris1.explore();
+/*
+    pixels[17].setColor(Color.blue);
+    spot.setColor(new Color(252,252,252));
+    pixels[500034].setColor(Color.blue);
+
+    ferris1.explore();
+/**/
+   // loop to access indexes of array or collection
+
+    //for each loop spot  is a ?
+    int red;
+    int blue;
+    int green;
+    for (Pixel spot1 : pixels)
+    {
+        blue = spot1.getBlue();
+        red = spot1.getRed();
+        green = spot1.getGreen();
+        blue = (int)(blue * .25);
+        red = (int)(red * .50);
+        green = (int)(green * 1.5);
+        spot1.setBlue(blue);
+        spot1.setRed(red);
+        spot1.setGreen(green);
+    }
+        //System.out.println( spot1 );
+     ferris1.explore();
+    // for (Pixel spot2 : pixels4)
+    // {
+        // red = spot2.getRed();
+        // green = spot2.getGreen();
+        // blue = spot2.getBlue();
+        // red = red;
+        // blue = (red + 5);
+        // green = (red - 5);
+        // spot2.setBlue(blue);
+        // spot2.setRed(red);
+        // spot2.setGreen(green);
+    // }
+     // cycle.explore();
+    // for (Pixel spot3 : pixels5)
+    // {
+        // red = spot3.getRed();
+        // green = spot3.getGreen();
+        // blue = spot3.getBlue();
+        // red = (red + 50);
+        // green = (green + 50);
+        // blue = (blue + 50);
+        // spot3.setBlue(blue);
+        // spot3.setRed(red);
+        // spot3.setGreen(green);
+    // }
+    // temple1.explore();
+    // for (Pixel spot3 : pixels5)
+    // {
+        // red = spot3.getRed();
+        // green = spot3.getGreen();
+        // blue = spot3.getBlue();
+        // red = (red - 50);
+        // green = (green - 50);
+        // blue = (blue - 50);
+        // spot3.setBlue(blue);
+        // spot3.setRed(red);
+        // spot3.setGreen(green);
+    // }
+    // temple1.explore();
+    // for (Pixel spot4 : pixels3)
+    // {
+        // red = spot4.getRed();
+        // green = spot4.getGreen();
+        // blue = spot4.getBlue();
+        // red = (250 - red);
+        // blue = (250 - blue);
+        // green = (250 - green);
+        // spot4.setBlue(blue);
+          // spot4.setRed(red);
+          // spot4.setGreen(green);
+    // }
+    // bMark.explore();
+    // for (Pixel spot4 : pixels3)
+    // {
+        // red = spot4.getRed();
+        // green = spot4.getGreen();
+        // blue = spot4.getBlue();
+        // if ((red > 80) && (green >= 50) && (blue < 130))
+        // {
+          // red = (int)(red * 0.5);
+          // green = (int)(green * .25);
+          // blue = (int)(blue * 1.5);
+          // spot4.setBlue(blue);
+          // spot4.setRed(red);
+          // spot4.setGreen(green);  
+        // }
+    // }
+    // bMark.explore();
+    //ferris1.write("images/SFTry1.jpg");
+
+ /**
+  * Method to clear red from picture
+  * @param none
+  * @return none
+  */
+ /*
+    for (Pixel pixelObj : pixels)
+        {
+            //set the red value of the current pixel to the new value
+           
+
+        }
+    ferris1.explore();
+    
+/**/
+ /**
+  * Method to reduce red from picture by a factor of n
+  * @param none
+  * @return none
+  */
+
+/*
+int value;
+final double  FACTOR = .5;
+    for (Pixel pixelObj : pixels)
+    {
+
+        //get the redvalue
+        value = pixelObj.getRed();
+        //System.out.println(value);
+
+        //decrease the red value by 50%
+        
+        //set the red value of the current pixel to the new value
+        
+
+    }
+    // use new picture when changing or it will make changes to 
+    // pic you already changed
+    ferris1.explore();
+    ferris2.explore();
+
+  /**/ 
+    //write/save a picture as a file
+    ferris1.write("images/ferris11.jpg");
+
+    /**/
+  }//main
 }//class
