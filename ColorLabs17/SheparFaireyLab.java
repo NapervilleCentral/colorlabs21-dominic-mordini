@@ -32,7 +32,7 @@ public class SheparFaireyLab
      //relative path               dir/folder/file
      
      Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
-     Picture selfie = new Picture("images/selfie.jpg");
+     Picture selfie = new Picture("images/seflie.jpg");
     
 
      //!!!!!!!! Displays the picture
@@ -50,8 +50,18 @@ public class SheparFaireyLab
     
      //how many pixels or how large array
     System.out.println("This is a large array"+pixels.length  );
-    ferris1.explore();
-    selfie.ex
+    // ferris1.explore();
+    selfie.explore();
+    
+    Color darkBlue = new Color(0, 71, 56);
+    Color red1 = new Color(217, 26, 33);
+    Color lightBlue = new Color(112, 150, 158);
+    Color offWhite = new Color(252, 227, 166);
+    
+    int width = selfie.getWidth();
+    int height = selfie.getHeight();
+    
+    
 
     /**/
         //access each index, arrray note
@@ -86,33 +96,103 @@ public class SheparFaireyLab
     int red;
     int blue;
     int green;
-    for (Pixel spot1 : pixels)
-    {
-        blue = spot1.getBlue();
-        red = spot1.getRed();
-        green = spot1.getGreen();
-        blue = (int)(blue * .25);
-        red = (int)(red * .50);
-        green = (int)(green * 1.5);
-        spot1.setBlue(blue);
-        spot1.setRed(red);
-        spot1.setGreen(green);
+   
+    for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color c = new Color(image.getRGB(x, y));
+                int grayVal = (c.getRed() + c.getGreen() + c.getBlue()) / 3;
+                Color g = new Color(grayVal, grayVal, grayVal);
+                gray.setRGB(x, y, g.getRGB());
+            }
+        }
+    
+
+    int[] values = new int[width * height];
+    int k = 0;
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            Color g = new Color(gray.getRGB(x, y));
+            values[k++] = g.getRed();
+        }
     }
-        //System.out.println( spot1 );
-     ferris1.explore();
-    // for (Pixel spot2 : pixels4)
-    // {
-        // red = spot2.getRed();
-        // green = spot2.getGreen();
-        // blue = spot2.getBlue();
-        // red = red;
-        // blue = (red + 5);
-        // green = (red - 5);
-        // spot2.setBlue(blue);
-        // spot2.setRed(red);
-        // spot2.setGreen(green);
-    // }
-     // cycle.explore();
+
+        // Sort all grayscale values
+        Arrays.sort(values);
+
+        // Divide into 4 equal groups
+        int group = values.length / 4;
+        int cutoff1 = values[group];
+        int cutoff2 = values[group * 2];
+        int cutoff3 = values[group * 3];
+
+        
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++) {
+            
+                int val = new Color(gray.getRGB(x, y)).getRed();
+                Color newColor;
+                if (val < cutoff1)
+                    newColor = darkBlue;
+                else if (val < cutoff2)
+                    newColor = red1;
+                else if (val < cutoff3)
+                }
+        }
+        
+
+       
+            
+              
+        
+
+                
+
+        int[] values = new int[width * height];
+        int k = 0;
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color g = new Color(gray.getRGB(x, y));
+                values[k++] = g.getRed();
+            }
+        }
+
+        // Sort all grayscale values
+        Arrays.sort(values);
+
+        // Divide into 4 equal groups
+        int group = values.length / 4;
+        int cutoff1 = values[group];
+        int cutoff2 = values[group * 2];
+        int cutoff3 = values[group * 3];
+
+        // Define Fairey colors
+        Color darkBlue = new Color(0, 51, 76);
+        Color red = new Color(217, 26, 33);
+        Color lightBlue = new Color(112, 150, 158);
+        Color offWhite = new Color(252, 227, 166);
+
+        // Create result image
+        BufferedImage fairey = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        // Color pixels based on which group they belong to
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int val = new Color(gray.getRGB(x, y)).getRed();
+                Color newColor;
+                if (val < cutoff1)
+                    newColor = darkBlue;
+                else if (val < cutoff2)
+                    newColor = red;
+                else if (val < cutoff3)
+                    newColor = lightBlue;
+                else
+                    newColor = offWhite;
+
+
+                selfie.setRGB(x, y, newColor.getRGB());
+            }
+        }
+    
     // for (Pixel spot3 : pixels5)
     // {
         // red = spot3.getRed();
@@ -214,7 +294,7 @@ final double  FACTOR = .5;
 
   /**/ 
     //write/save a picture as a file
-    ferris1.write("images/ferris11.jpg");
+    // ferris1.write("images/ferris11.jpg");
 
     /**/
   }//main
