@@ -9,7 +9,8 @@
 import java.util.Random;
 import java.awt.*;// the color class in awt library
 import java.util.*;
-import java.util.List; // resolves problem with java.awt.List and java.util.List
+import java.util.List; 
+import java.awt.image.ColorConvertOp;// resolves problem with java.awt.List and java.util.List
 public class SheparFaireyLab
 {
 
@@ -19,237 +20,365 @@ public class SheparFaireyLab
      */
   public static void main(String[] args)
   {
-    //opens picture using a dialog box
-      /**/
-     // String fileName = FileChooser.pickAFile();
-     // Picture pictObj = new Picture(fileName);
-     // pictObj.explore();
+    Picture pic = new Picture("images/seflie.jpg");
+    Pixel[] pixels = pic.getPixels();
+    
+    // STEP 1 — Convert picture to grayscale (using 1 for-each loop)
+        // // ----------------------------------------------------
+        for (Pixel p : pixels) {
+            int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
+            p.setRed(gray);
+            p.setGreen(gray);
+            p.setBlue(gray);
+        }
 
-     //opens a pictue using a path
-     //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
-     
-     //Know it, Love it, Live it!!!!!!!!!!
-     //relative path               dir/folder/file
-     
-     Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
-     Picture selfie = new Picture("images/seflie.jpg");
-    
+        // ----------------------------------------------------
+        // STEP 2 — Find min and max grayscale values (for thresholds)
+        // ----------------------------------------------------
+        int min = 255;
+        int max = 0;
 
-     //!!!!!!!! Displays the picture
-     
-    
-     
-     //makes an array of pixels
-     Pixel[] pixels;
-     Pixel[] pixels2;
-    
-     //gets pixels from picture and assigns to pixels array
-     pixels = ferris1.getPixels();
-     pixels2 = selfie.getPixels();
-    
-    
-     //how many pixels or how large array
-    System.out.println("This is a large array"+pixels.length  );
-    // ferris1.explore();
-    selfie.explore();
-    
-    Color darkBlue = new Color(0, 71, 56);
-    Color red1 = new Color(217, 26, 33);
-    Color lightBlue = new Color(112, 150, 158);
-    Color offWhite = new Color(252, 227, 166);
-    
-    int width = selfie.getWidth();
-    int height = selfie.getHeight();
-    
-    
+        for (Pixel p : pixels) {
+            int gray = p.getRed();  // red = green = blue = gray
+            if (gray < min) min = gray;
+            if (gray > max) max = gray;
+        }
 
-    /**/
-        //access each index, arrray note
-    // System.out.println(pixels[17]);
-    // //access each pixel pic.methods.getPixel
-    // Pixel spot = ferris1.getPixel(100,100);
-    // Pixel spot50 = ferris1.getPixel(50,50);
-    // Color lesteel = new Color(176,196,222);
-    
-    
-    // System.out.println(pixels[17].getColor());
-    // System.out.println(spot);
-    
-    // Pixel spot17 = pixels[17];
-    // spot17.setRed(200);
-    // spot17.setBlue(150);
-    // spot17.setGreen(175);
-    // ferris1.explore();
-    
-    // spot.setColor(Color.yellow);
-    // ferris1.explore();
-/*
-    pixels[17].setColor(Color.blue);
-    spot.setColor(new Color(252,252,252));
-    pixels[500034].setColor(Color.blue);
+        // Balanced method assigns equal ranges
+        double interval = (max - min + 1) / 5.0;
 
-    ferris1.explore();
-/**/
-   // loop to access indexes of array or collection
+        // ----------------------------------------------------
+        // Shepard Fairey "Balanced" 4 Color Palette
+        // ----------------------------------------------------
+        Color navyBlue = new Color(0, 34, 102);
+        Color mintGreen = new Color(122, 225, 122);
+        Color coral = new Color(255, 127, 80);
+        Color goldenYellow = new Color(255, 215, 0);
+        Color lightGray = new Color(200, 200, 200);
 
-    //for each loop spot  is a ?
-    int red;
-    int blue;
-    int green;
-   
-    for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                Color c = new Color(image.getRGB(x, y));
-                int grayVal = (c.getRed() + c.getGreen() + c.getBlue()) / 3;
-                Color g = new Color(grayVal, grayVal, grayVal);
-                gray.setRGB(x, y, g.getRGB());
+        // ----------------------------------------------------
+        // STEP 3 — Assign each pixel a color based on grayscale range
+        // ----------------------------------------------------
+        for (Pixel p : pixels) {
+            int gray = p.getRed();
+
+            if (gray < min + interval) {
+                p.setColor(navyBlue);
             }
-        }
-    
-
-    int[] values = new int[width * height];
-    int k = 0;
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            Color g = new Color(gray.getRGB(x, y));
-            values[k++] = g.getRed();
-        }
-    }
-
-        // Sort all grayscale values
-        Arrays.sort(values);
-
-        // Divide into 4 equal groups
-        int group = values.length / 4;
-        int cutoff1 = values[group];
-        int cutoff2 = values[group * 2];
-        int cutoff3 = values[group * 3];
-
-        
-        for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++) {
-            
-                int val = new Color(gray.getRGB(x, y)).getRed();
-                Color newColor;
-                if (val < cutoff1)
-                    newColor = darkBlue;
-                else if (val < cutoff2)
-                    newColor = red1;
-                else if (val < cutoff3)
-                }
-        }
-        
-
-       
-            
-              
-        
-
-                
-
-        int[] values = new int[width * height];
-        int k = 0;
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                Color g = new Color(gray.getRGB(x, y));
-                values[k++] = g.getRed();
+            else if (gray < min + 2 * interval) {
+                p.setColor(coral);
+            }
+            else if (gray < min + 3 * interval) {
+                p.setColor(mintGreen);
+            }
+            else if (gray < min + 4 * interval) {
+                p.setColor(goldenYellow);
+            }
+            else {
+                p.setColor(lightGray);
             }
         }
 
-        // Sort all grayscale values
-        Arrays.sort(values);
-
-        // Divide into 4 equal groups
-        int group = values.length / 4;
-        int cutoff1 = values[group];
-        int cutoff2 = values[group * 2];
-        int cutoff3 = values[group * 3];
-
-        // Define Fairey colors
-        Color darkBlue = new Color(0, 51, 76);
-        Color red = new Color(217, 26, 33);
-        Color lightBlue = new Color(112, 150, 158);
-        Color offWhite = new Color(252, 227, 166);
-
-        // Create result image
-        BufferedImage fairey = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-        // Color pixels based on which group they belong to
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                int val = new Color(gray.getRGB(x, y)).getRed();
-                Color newColor;
-                if (val < cutoff1)
-                    newColor = darkBlue;
-                else if (val < cutoff2)
-                    newColor = red;
-                else if (val < cutoff3)
-                    newColor = lightBlue;
-                else
-                    newColor = offWhite;
-
-
-                selfie.setRGB(x, y, newColor.getRGB());
-            }
-        }
+        // ----------------------------------------------------
+        // STEP 4 — Display final Balanced Shepard-Fairey image
+        // ----------------------------------------------------
+        pic.explore();
+        // pic.write("images/selfieIntense.jpg");
     
-    // for (Pixel spot3 : pixels5)
-    // {
-        // red = spot3.getRed();
-        // green = spot3.getGreen();
-        // blue = spot3.getBlue();
-        // red = (red + 50);
-        // green = (green + 50);
-        // blue = (blue + 50);
-        // spot3.setBlue(blue);
-        // spot3.setRed(red);
-        // spot3.setGreen(green);
-    // }
-    // temple1.explore();
-    // for (Pixel spot3 : pixels5)
-    // {
-        // red = spot3.getRed();
-        // green = spot3.getGreen();
-        // blue = spot3.getBlue();
-        // red = (red - 50);
-        // green = (green - 50);
-        // blue = (blue - 50);
-        // spot3.setBlue(blue);
-        // spot3.setRed(red);
-        // spot3.setGreen(green);
-    // }
-    // temple1.explore();
-    // for (Pixel spot4 : pixels3)
-    // {
-        // red = spot4.getRed();
-        // green = spot4.getGreen();
-        // blue = spot4.getBlue();
-        // red = (250 - red);
-        // blue = (250 - blue);
-        // green = (250 - green);
-        // spot4.setBlue(blue);
-          // spot4.setRed(red);
-          // spot4.setGreen(green);
-    // }
-    // bMark.explore();
-    // for (Pixel spot4 : pixels3)
-    // {
-        // red = spot4.getRed();
-        // green = spot4.getGreen();
-        // blue = spot4.getBlue();
-        // if ((red > 80) && (green >= 50) && (blue < 130))
-        // {
-          // red = (int)(red * 0.5);
-          // green = (int)(green * .25);
-          // blue = (int)(blue * 1.5);
-          // spot4.setBlue(blue);
-          // spot4.setRed(red);
-          // spot4.setGreen(green);  
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // // STEP 1 — Convert image to grayscale
+        // // ----------------------------------------------------
+        // for (Pixel p : pixels) {
+            // int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
+            // p.setRed(gray);
+            // p.setGreen(gray);
+            // p.setBlue(gray);
         // }
-    // }
-    // bMark.explore();
-    //ferris1.write("images/SFTry1.jpg");
+        // pic.explore();
 
+        // // ----------------------------------------------------
+        // // STEP 2 — Make a copy of the pixel array to sort
+        // // ----------------------------------------------------
+        // Pixel[] sorted = Arrays.copyOf(pixels, pixels.length);
+
+        // // ----------------------------------------------------
+        // // STEP 3 — Sort pixels by grayscale (ascending)
+        // // ----------------------------------------------------
+        // Arrays.sort(sorted, new Comparator<Pixel>() {
+            // public int compare(Pixel p1, Pixel p2) {
+                // return p1.getRed() - p2.getRed(); // red = gray now
+            // }
+        // });
+
+        // // ----------------------------------------------------
+        // // Fairey 4-color palette
+        // // ----------------------------------------------------
+        // Color darkBlue = new Color(0, 51, 76);
+        // Color red = new Color(217, 26, 33);
+        // Color lightBlue = new Color(112, 150, 158);
+        // Color offWhite = new Color(252, 252, 191);
+
+        // // Each group size = 1/4 of all pixels
+        // int group = pixels.length / 4;
+
+        // // ----------------------------------------------------
+        // // STEP 4 — Assign colors to sorted array
+        // // first 25% darkest → dark blue
+        // // next 25% → red
+        // // next 25% → light blue
+        // // last 25% brightest → off white
+        // // ----------------------------------------------------
+        // for (int i = 0; i < sorted.length; i++) {
+            // Pixel p = sorted[i];
+
+            // if (i < group)
+                // p.setColor(darkBlue);
+            // else if (i < 2 * group)
+                // p.setColor(red);
+            // else if (i < 3 * group)
+                // p.setColor(lightBlue);
+            // else
+                // p.setColor(offWhite);
+        // }
+
+        // // ----------------------------------------------------
+        // // STEP 5 — Display the final balanced picture
+        // // ----------------------------------------------------
+        // pic.explore();
+        // pic.write("images/selfieBalanced.jpg");
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+// // STEP 1 — Convert picture to grayscale
+        // // ----------------------------------------------------
+        // for (Pixel p : pixels) {
+            // int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
+            // p.setRed(gray);
+            // p.setGreen(gray);
+            // p.setBlue(gray);
+        // }
+        // pic.explore();
+
+        // // ----------------------------------------------------
+        // // STEP 2 — Find smallest (s) and biggest (b) grayscale
+        // // ----------------------------------------------------
+        // int s = 255;
+        // int b = 0;
+
+        // for (Pixel p : pixels) {
+            // int gray = p.getRed();   // all channels equal now
+            // if (gray < s) s = gray;
+            // if (gray > b) b = gray;
+        // }
+
+        // // spacing = (b - s) / 4
+        // double range = (b - s + 1) / 4.0;
+
+        // // ----------------------------------------------------
+        // // Shepard Fairey 4-color palette
+        // // ----------------------------------------------------
+        // Color darkBlue = new Color(0, 51, 76);      // group 1
+        // Color red = new Color(217, 26, 33);         // group 2
+        // Color lightBlue = new Color(112, 150, 158); // group 3
+        // Color offWhite = new Color(252, 252, 191);  // group 4
+
+        // // ----------------------------------------------------
+        // // STEP 3 — Apply color based on intensity range
+        // // ----------------------------------------------------
+        // for (Pixel p : pixels) {
+            // int gray = p.getRed();
+
+            // if (gray < s + range) {
+                // p.setColor(darkBlue);
+            // }
+            // else if (gray < s + 2 * range) {
+                // p.setColor(red);
+            // }
+            // else if (gray < s + 3 * range) {
+                // p.setColor(lightBlue);
+            // }
+            // else {
+                // p.setColor(offWhite);
+            // }
+        // }
+
+        // // ----------------------------------------------------
+        // // STEP 4 — Show intense Shepard-Fairey result
+        // // ----------------------------------------------------
+        // pic.explore();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+// // STEP 1 — Convert picture to grayscale (using 1 for-each loop)
+        // // ----------------------------------------------------
+        // for (Pixel p : pixels) {
+            // int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
+            // p.setRed(gray);
+            // p.setGreen(gray);
+            // p.setBlue(gray);
+        // }
+        // pic.explore();
+
+        // // ----------------------------------------------------
+        // // STEP 2 — Find min and max grayscale values (for thresholds)
+        // // ----------------------------------------------------
+        // int min = 255;
+        // int max = 0;
+
+        // for (Pixel p : pixels) {
+            // int gray = p.getRed();  // red = green = blue = gray
+            // if (gray < min) min = gray;
+            // if (gray > max) max = gray;
+        // }
+
+        // // Balanced method assigns equal ranges
+        // double interval = (max - min + 1) / 4.0;
+
+        // // ----------------------------------------------------
+        // // Shepard Fairey "Balanced" 4 Color Palette
+        // // ----------------------------------------------------
+        // Color darkBlue = new Color(0, 51, 76);
+        // Color red = new Color(217, 26, 33);
+        // Color lightBlue = new Color(112, 150, 158);
+        // Color offWhite = new Color(252, 252, 191);
+
+        // // ----------------------------------------------------
+        // // STEP 3 — Assign each pixel a color based on grayscale range
+        // // ----------------------------------------------------
+        // for (Pixel p : pixels) {
+            // int gray = p.getRed();
+
+            // if (gray < min + interval) {
+                // p.setColor(darkBlue);
+            // }
+            // else if (gray < min + 2 * interval) {
+                // p.setColor(red);
+            // }
+            // else if (gray < min + 3 * interval) {
+                // p.setColor(lightBlue);
+            // }
+            // else {
+                // p.setColor(offWhite);
+            // }
+        // }
+
+        // // ----------------------------------------------------
+        // // STEP 4 — Display final Balanced Shepard-Fairey image
+        // // ----------------------------------------------------
+        // pic.explore();
+        // pic.write("images/selfieIntense.jpg");
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+       
+       
+    
+
+    
+   
  /**
   * Method to clear red from picture
   * @param none
