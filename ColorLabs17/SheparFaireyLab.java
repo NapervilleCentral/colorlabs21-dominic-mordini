@@ -50,11 +50,11 @@ public class SheparFaireyLab
         // ----------------------------------------------------
         // Shepard Fairey "Balanced" 4 Color Palette
         // ----------------------------------------------------
-        Color navyBlue = new Color(0, 34, 102);
-        Color mintGreen = new Color(122, 225, 122);
-        Color coral = new Color(255, 127, 80);
-        Color goldenYellow = new Color(255, 215, 0);
-        Color lightGray = new Color(200, 200, 200);
+        Color mBlue = new Color(220, 20, 60);
+        Color skyBlue = new Color(255, 130, 0);
+        Color coral = new Color(0, 200, 255);
+        Color mintGreen = new Color(150, 255, 0);
+        Color warmSand = new Color(75, 0, 130);
 
         // ----------------------------------------------------
         // STEP 3 — Assign each pixel a color based on grayscale range
@@ -63,19 +63,19 @@ public class SheparFaireyLab
             int gray = p.getRed();
 
             if (gray < min + interval) {
-                p.setColor(navyBlue);
+                p.setColor(mBlue);
             }
             else if (gray < min + 2 * interval) {
-                p.setColor(coral);
+                p.setColor(skyBlue);
             }
             else if (gray < min + 3 * interval) {
-                p.setColor(mintGreen);
+                p.setColor(coral);
             }
             else if (gray < min + 4 * interval) {
-                p.setColor(goldenYellow);
+                p.setColor(mintGreen);
             }
             else {
-                p.setColor(lightGray);
+                p.setColor(warmSand);
             }
         }
 
@@ -83,7 +83,7 @@ public class SheparFaireyLab
         // STEP 4 — Display final Balanced Shepard-Fairey image
         // ----------------------------------------------------
         pic.explore();
-        // pic.write("images/selfieIntense.jpg");
+        pic.write("images/selfieCustom4.jpg");
     
       
     
