@@ -23,8 +23,7 @@ public class SheparFaireyLab
     Picture pic = new Picture("images/seflie.jpg");
     Pixel[] pixels = pic.getPixels();
     
-    // STEP 1 — Convert picture to grayscale (using 1 for-each loop)
-        // // ----------------------------------------------------
+   
         for (Pixel p : pixels) {
             int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
             p.setRed(gray);
@@ -32,9 +31,7 @@ public class SheparFaireyLab
             p.setBlue(gray);
         }
 
-        // ----------------------------------------------------
-        // STEP 2 — Find min and max grayscale values (for thresholds)
-        // ----------------------------------------------------
+       
         int min = 255;
         int max = 0;
 
@@ -48,42 +45,100 @@ public class SheparFaireyLab
         double interval = (max - min + 1) / 5.0;
 
         // ----------------------------------------------------
-        // Shepard Fairey "Balanced" 4 Color Palette
         // ----------------------------------------------------
-        Color mBlue = new Color(220, 20, 60);
-        Color skyBlue = new Color(255, 130, 0);
-        Color coral = new Color(0, 200, 255);
-        Color mintGreen = new Color(150, 255, 0);
-        Color warmSand = new Color(75, 0, 130);
+        Color darkBlue = new Color(0, 51, 76);
+        Color red = new Color(217, 26, 33);
+        Color lightBlue = new Color(112, 150, 158);
+        Color offWhite = new Color(222, 222, 161);
+        Color offWhite2 = new Color(252, 252, 191);
 
         // ----------------------------------------------------
-        // STEP 3 — Assign each pixel a color based on grayscale range
         // ----------------------------------------------------
         for (Pixel p : pixels) {
             int gray = p.getRed();
 
             if (gray < min + interval) {
-                p.setColor(mBlue);
+                p.setColor(darkBlue);
             }
             else if (gray < min + 2 * interval) {
-                p.setColor(skyBlue);
+                p.setColor(red);
             }
             else if (gray < min + 3 * interval) {
-                p.setColor(coral);
+                p.setColor(lightBlue);
             }
-            else if (gray < min + 4 * interval) {
-                p.setColor(mintGreen);
+            else if (gray < min + 3.5 * interval) {
+                p.setColor(offWhite);
             }
+            
             else {
-                p.setColor(warmSand);
+                p.setColor(offWhite2);
             }
         }
 
         // ----------------------------------------------------
-        // STEP 4 — Display final Balanced Shepard-Fairey image
         // ----------------------------------------------------
         pic.explore();
-        pic.write("images/selfieCustom4.jpg");
+        pic.write("images/selfieBalanced+.jpg");
+        
+        
+        
+        // Picture pic = new Picture("images/seflie.jpg");
+        // Pixel[] pixels = pic.getPixels();
+    
+   
+        // for (Pixel p : pixels) {
+            // int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
+            // p.setRed(gray);
+            // p.setGreen(gray);
+            // p.setBlue(gray);
+        // }
+
+       
+        // int min = 255;
+        // int max = 0;
+
+        // for (Pixel p : pixels) {
+            // int gray = p.getRed();  // red = green = blue = gray
+            // if (gray < min) min = gray;
+            // if (gray > max) max = gray;
+        // }
+
+        // // Balanced method assigns equal ranges
+        // double interval = (max - min + 1) / 5.0;
+
+        // // ----------------------------------------------------
+        // // ----------------------------------------------------
+        // Color darkBlue = new Color(0, 51, 76);
+        // Color red = new Color(217, 26, 33);
+        // Color lightBlue = new Color(112, 150, 158);
+        // Color offWhite = new Color(252, 252, 191);
+
+        // // ----------------------------------------------------
+        // // ----------------------------------------------------
+        // for (Pixel p : pixels) {
+            // int gray = p.getRed();
+
+            // if (gray < min + interval) {
+                // p.setColor(darkBlue);
+            // }
+            // else if (gray < min + 2 * interval) {
+                // p.setColor(darkBlue);
+            // }
+            // else if (gray < min + 3 * interval) {
+                // p.setColor(red);
+            // }
+            // else if (gray < min + 4 * interval) {
+                // p.setColor(lightBlue);
+            // }
+            // else {
+                // p.setColor(offWhite);
+            // }
+        // }
+
+        // // ----------------------------------------------------
+        // // ----------------------------------------------------
+        // pic.explore();
+        // pic.write("images/selfieBalanced+.jpg");
     
       
     
@@ -113,8 +168,7 @@ public class SheparFaireyLab
     
     
     
-    // // STEP 1 — Convert image to grayscale
-        // // ----------------------------------------------------
+   
         // for (Pixel p : pixels) {
             // int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
             // p.setRed(gray);
@@ -123,23 +177,17 @@ public class SheparFaireyLab
         // }
         // pic.explore();
 
-        // // ----------------------------------------------------
-        // // STEP 2 — Make a copy of the pixel array to sort
-        // // ----------------------------------------------------
+       
         // Pixel[] sorted = Arrays.copyOf(pixels, pixels.length);
 
-        // // ----------------------------------------------------
-        // // STEP 3 — Sort pixels by grayscale (ascending)
-        // // ----------------------------------------------------
+       
         // Arrays.sort(sorted, new Comparator<Pixel>() {
             // public int compare(Pixel p1, Pixel p2) {
                 // return p1.getRed() - p2.getRed(); // red = gray now
             // }
         // });
 
-        // // ----------------------------------------------------
-        // // Fairey 4-color palette
-        // // ----------------------------------------------------
+
         // Color darkBlue = new Color(0, 51, 76);
         // Color red = new Color(217, 26, 33);
         // Color lightBlue = new Color(112, 150, 158);
@@ -169,10 +217,10 @@ public class SheparFaireyLab
         // }
 
         // // ----------------------------------------------------
-        // // STEP 5 — Display the final balanced picture
+       
         // // ----------------------------------------------------
         // pic.explore();
-        // pic.write("images/selfieBalanced.jpg");
+        // pic.write("images/selfieIntense.jpg");
         
     
     
