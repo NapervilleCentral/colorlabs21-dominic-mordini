@@ -6,8 +6,8 @@ import java.util.List;
  * 1 Copyed orginal]
  * 2 Mirror
  * 
- * @author (Mr. Hayes) 
- * @version (Poster Project May 23)
+ * @author (Mr. Hayes)(Dominic Mordini) 
+ * @version (Poster Project May 4,2026)
  */
 public class posterSample5
 {
