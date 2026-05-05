@@ -19,174 +19,34 @@ public class TestPicture17
      */
   public static void main(String[] args)
   {
-      //opens picture using a dialog box
-      /**/
-     // String fileName = FileChooser.pickAFile();
-     // Picture pictObj = new Picture(fileName);
-     // pictObj.explore();
+    Picture pic = new Picture("images/jellyFish.jpg");
+    Pixel[] pixels = pic.getPixels();
+    
+   
+        for (Pixel p : pixels) {
+            int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
+            p.setRed(gray);
+            p.setGreen(gray);
+            p.setBlue(gray);
+        }
 
-     //opens a pictue using a path
-     //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
+       
+        int min = 255;
+        int max = 0;
+
+        for (Pixel p : pixels) {
+            int gray = p.getRed();  // red = green = blue = gray
+            if (gray < min) min = gray;
+            if (gray > max) max = gray;
+        }
+
+        mirrorVertical(pic);
+        pic.explore();
+        
      
-     //Know it, Love it, Live it!!!!!!!!!!
-     //relative path               dir/folder/file
-     Picture apic = new Picture("images/jellyFish.jpg");
-     Picture canvas = new Picture("images/posterCanvas.jpg");
-     Picture bMark = new Picture("images/blue-mark.jpg");
-     Picture cycle = new Picture("images/blueMotorcycle.jpg");
-     Picture temple1 = new Picture("images/temple.jpg");
-     
-     mirrorVertical(apic);
-     apic.explore();
-     // copytoCanvas(apic,canvas);
-     // canvas.explore();
-     
-     // ferris1.explore();
-     // bMark.explore();
     
      
      
-     
-     
-
-     //!!!!!!!! Displays the picture
-     
-    
-     
-     //makes an array of pixels
-     // Pixel[] pixels;
-     // Pixel[] pixels2;
-     // Pixel[] pixels3;
-     // Pixel[] pixels4;
-     // Pixel[] pixels5;
-     // //gets pixels from picture and assigns to pixels array
-     // pixels = ferris1.getPixels();
-     // pixels2 = apic.getPixels();
-     // pixels3 = bMark.getPixels();
-     // pixels4 = cycle.getPixels();
-     // pixels5 = temple1.getPixels();
-    
-     // //how many pixels or how large array
-    // System.out.println("This is a large array"+pixels.length  );
-    // temple1.explore();
-    // bMark.explore();
-
-    // /**/
-        // //access each index, arrray note
-    // // System.out.println(pixels[17]);
-    // // //access each pixel pic.methods.getPixel
-    // // Pixel spot = ferris1.getPixel(100,100);
-    // // Pixel spot50 = ferris1.getPixel(50,50);
-    // // Color lesteel = new Color(176,196,222);
-    
-    
-    // // System.out.println(pixels[17].getColor());
-    // // System.out.println(spot);
-    
-    // // Pixel spot17 = pixels[17];
-    // // spot17.setRed(200);
-    // // spot17.setBlue(150);
-    // // spot17.setGreen(175);
-    // // ferris1.explore();
-    
-    // // spot.setColor(Color.yellow);
-    // // ferris1.explore();
-
-    // pixels[17].setColor(Color.blue);
-    // spot.setColor(new Color(252,252,252));
-    // pixels[500034].setColor(Color.blue);
-
-    // ferris1.explore();
-
-   // // loop to access indexes of array or collection
-
-    // //for each loop spot  is a ?
-    // int red;
-    // int blue;
-    // int green;
-    // for (Pixel spot1 : pixels)
-    // {
-        // blue = spot1.getBlue();
-        // red = spot1.getRed();
-        // green = spot1.getGreen();
-        // blue = (int)(blue * .25);
-        // red = (int)(red * .50);
-        // green = (int)(green * 1.5);
-        // spot1.setBlue(blue);
-        // spot1.setRed(red);
-        // spot1.setGreen(green);
-    // }
-        // //System.out.println( spot1 );
-     // ferris1.explore();
-    // for (Pixel spot2 : pixels4)
-    // {
-        // red = spot2.getRed();
-        // green = spot2.getGreen();
-        // blue = spot2.getBlue();
-        // red = red;
-        // blue = (red + 5);
-        // green = (red - 5);
-        // spot2.setBlue(blue);
-        // spot2.setRed(red);
-        // spot2.setGreen(green);
-    // }
-     // cycle.explore();
-    // for (Pixel spot3 : pixels5)
-    // {
-        // red = spot3.getRed();
-        // green = spot3.getGreen();
-        // blue = spot3.getBlue();
-        // red = (red + 50);
-        // green = (green + 50);
-        // blue = (blue + 50);
-        // spot3.setBlue(blue);
-        // spot3.setRed(red);
-        // spot3.setGreen(green);
-    // }
-    // temple1.explore();
-    // for (Pixel spot3 : pixels5)
-    // {
-        // red = spot3.getRed();
-        // green = spot3.getGreen();
-        // blue = spot3.getBlue();
-        // red = (red - 50);
-        // green = (green - 50);
-        // blue = (blue - 50);
-        // spot3.setBlue(blue);
-        // spot3.setRed(red);
-        // spot3.setGreen(green);
-    // }
-    // temple1.explore();
-    // for (Pixel spot4 : pixels3)
-    // {
-        // red = spot4.getRed();
-        // green = spot4.getGreen();
-        // blue = spot4.getBlue();
-        // red = (250 - red);
-        // blue = (250 - blue);
-        // green = (250 - green);
-        // spot4.setBlue(blue);
-          // spot4.setRed(red);
-          // spot4.setGreen(green);
-    // }
-    // bMark.explore();
-    // for (Pixel spot4 : pixels3)
-    // {
-        // red = spot4.getRed();
-        // green = spot4.getGreen();
-        // blue = spot4.getBlue();
-        // if ((red > 80) && (green >= 50) && (blue < 130))
-        // {
-          // red = (int)(red * 0.5);
-          // green = (int)(green * .25);
-          // blue = (int)(blue * 1.5);
-          // spot4.setBlue(blue);
-          // spot4.setRed(red);
-          // spot4.setGreen(green);  
-        // }
-    // }
-    // bMark.explore();
-    // //ferris1.write("images/SFTry1.jpg");
 
  
 
@@ -215,27 +75,51 @@ public class TestPicture17
           }
       }
   }//mirrorVertical
-  // /**
-   // * copy one pic to another pic/canvas
-   // * add two ints to params to place you want pic on the target
-   // */
-  // public static void copytoCanvas(Picture source, Picture target)
-  // {
-      // Pixel sourcePix = null;
-      // Pixel targetPix = null;
+  /**
+   * copy one pic to another pic/canvas
+   * add two ints to params to place you want pic on the target
+   */
+  public static void copytoCanvas(Picture source, Picture target)
+  {
+      Pixel sourcePix = null;
+      Pixel targetPix = null;
       
-      // //loop through columns (targetX is starting point on Canvas)
-      // for(int sourceX = 0, targetX = 0; sourceX < source.getWidth(); sourceX++, targetX++)
-      // {
-          // //loop through the rows
-          // for(int sourceY = 0, targetY = 0; sourceY < source.getHeight(); sourceY++, targetY++)
-          // {
-              // sourcePix = source.getPixel(sourceX, sourceY);
-              // targetPix = target.getPixel(targetX, targetY);
-              // targetPix.setColor(sourcePix.getColor());
-          // }
-      // }
-  // }
+      //loop through columns (targetX is starting point on Canvas) sourceX+=2 - smaller copy every other pixel
+      //                                                           sourceX+=.5 - larger, copy every pixel twice, cast as int in the getPixel & set color
+      for(int sourceX = 0, targetX = 0; sourceX < source.getWidth(); sourceX++, targetX++)
+      {
+          //loop through the rows                                         sourceY+=2 - smaller
+          //                                                              sourceY+=.5 - larger
+          for(int sourceY = 0, targetY = 0; sourceY < source.getHeight(); sourceY++, targetY++)
+          {
+              sourcePix = source.getPixel(sourceX, sourceY);
+              targetPix = target.getPixel(targetX, targetY);
+              targetPix.setColor(sourcePix.getColor());
+          }
+      }
+  }
+  /**
+  * Method to mirror part of the temple picture around a 
+  * vertical line at the mirror point to fix the right side of the roof. [cite: 221]
+  */
+  public static void mirrorTemple(Picture source) 
+  {
+    int mirrorPoint = 276; 
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int count = 0;
+    for (int y = 27; y < 97; y++) 
+    {
+        for (int x = 13; x < mirrorPoint; x++) 
+        {
+            leftPixel = source.getPixel(x, y); 
+            rightPixel = source.getPixel(mirrorPoint + (mirrorPoint - x), y); 
+            rightPixel.setColor(leftPixel.getColor());
+            count++;
+        }
+    }
+  }
+
   
   
   
