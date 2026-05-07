@@ -20,12 +20,17 @@ public class TestPicture17
   public static void main(String[] args)
   {
     Picture pic = new Picture("images/turtle.jpg");
+    Picture pic2 = new Picture("images/turtle.jpg");
     Picture canvas = new Picture("images/posterCanvas.jpg");
     
     grayScale(pic);
-    //mirrorVertical(pic);
-    mirrorHoriz(pic);
+    mirrorVertical(pic);
     copytoCanvas(pic,canvas,0,0);
+    //grayScale(pic2);
+    mirrorVertical(pic2);
+    mirrorHorizontal(pic2);
+    shepardFarey(pic2);
+    copytoCanvas(pic2,canvas,2000,0);
     canvas.explore();
         
     
@@ -62,28 +67,30 @@ public class TestPicture17
       }
   }//mirrorVertical
   /**
-   * Method to mirror a vertical line in the middle of the picture based
-   * on the width
-   */
-  public static void mirrorHoriz(Picture source)
+  * Method to mirror a horizontal line in the middle of the picture based
+  * on the height
+  */
+  public static void mirrorHorizontal(Picture source)
   {
-      int height = source.getHeight();
-      int mirrorPoint = height/2;
-      Pixel leftPixel = null;
-      Pixel rightPixel = null;
-      
-      //loop through all the rows
-      for(int y = 0; y < source.getHeight(); y++)
-      {
-          //loop from 0 to the middle
-          for(int x = 0; x < mirrorPoint; x++)
-          {
-              leftPixel = source.getPixel(x,y);
-              rightPixel = source.getPixel(height -1 -x,y);
-              rightPixel.setColor(leftPixel.getColor());
-          }
-      }
-  }//mirrorVertical
+     int height = source.getHeight();
+     int mirrorPoint = height / 2;
+     Pixel topPixel = null;
+     Pixel bottomPixel = null;
+    
+     // Loop through all the columns
+     for (int x = 0; x < source.getWidth(); x++)
+     {
+         // Loop from 0 to the middle of the height
+         for (int y = 0; y < mirrorPoint; y++)
+         {
+             topPixel = source.getPixel(x, y);
+             // Calculate the corresponding pixel on the bottom half
+             bottomPixel = source.getPixel(x, height - 1 - y);
+             bottomPixel.setColor(topPixel.getColor());
+         }
+     }
+  }
+
   /**
    * copy one pic to another pic/canvas
    * add two ints to params to place you want pic on the target
@@ -117,15 +124,49 @@ public class TestPicture17
             p.setBlue(gray);
      }
      int min = 255;
-        int max = 0;
-
-        for (Pixel p : pixels) {
-            int gray = p.getRed();  // red = green = blue = gray
-            if (gray < min) min = gray;
-            if (gray > max) max = gray;
-        }
+     int max = 0;
+     for (Pixel p : pixels) 
+     {
+        int gray = p.getRed();  // red = green = blue = gray
+        if (gray < min) min = gray;
+        if (gray > max) max = gray;
+     }
 
   }
+  public static void shepardFarey(Picture source)
+  {
+      Pixel[] pixels = source.getPixels();
+      int min = 255;
+      int max = 0;
+      double interval = (max - min + 1) / 5.0;
+      Color cyan = new Color(50, 168, 168);
+      Color orange = new Color(240, 184, 31);
+      Color tropicgreen = new Color(31, 240, 142);
+      Color violet = new Color(96, 50, 168);
+      Color yellow = new Color(240, 233, 31);
+      for (Pixel p : pixels) 
+      {
+          int gray = p.getRed();
+
+          if (gray < min + 5 * interval) {
+                p.setColor(cyan);
+            }
+            else if (gray < min + 4 * interval) {
+                p.setColor(violet);
+            }
+            else if (gray < min + 3 * interval) {
+                p.setColor(tropicgreen);
+            }
+            else if (gray < min + 2 * interval) {
+                p.setColor(orange);
+            }
+            
+            else {
+                p.setColor(yellow);
+            }
+      }
+  }
+        
 
   
   
