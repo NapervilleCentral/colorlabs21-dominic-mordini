@@ -21,16 +21,23 @@ public class TestPicture17
   {
     Picture pic = new Picture("images/turtle.jpg");
     Picture pic2 = new Picture("images/turtle.jpg");
+    Picture pic3 = new Picture("images/turtle.jpg");
     Picture canvas = new Picture("images/posterCanvas.jpg");
     
     grayScale(pic);
     mirrorVertical(pic);
     copytoCanvas(pic,canvas,0,0);
-    //grayScale(pic2);
     mirrorVertical(pic2);
     mirrorHorizontal(pic2);
     shepardFarey(pic2);
     copytoCanvas(pic2,canvas,2000,0);
+    upsideDown(pic3);
+    invert(pic3);
+    copytoCanvas(pic3,canvas,4000,0);
+    
+    
+    
+    
     canvas.explore();
         
     
@@ -90,6 +97,51 @@ public class TestPicture17
          }
      }
   }
+  public static void upsideDown(Picture source) 
+  {
+      int height = source.getHeight();
+      // Only loop to the halfway point to swap top and bottom
+      int mirrorPoint = height / 2; 
+      Pixel topPixel = null;
+      Pixel bottomPixel = null;
+
+      for (int x = 0; x < source.getWidth(); x++) 
+      {
+          for (int y = 0; y < mirrorPoint; y++) 
+          {
+              topPixel = source.getPixel(x, y);
+              bottomPixel = source.getPixel(x, height - 1 - y);
+
+              // 1. Save the top color temporarily
+              java.awt.Color tempColor = topPixel.getColor();
+
+              // 2. Move bottom color to the top
+              topPixel.setColor(bottomPixel.getColor());
+
+              // 3. Put the saved temporary color into the bottom
+              bottomPixel.setColor(tempColor);
+          }
+      }
+  }
+  public static void invert(Picture source)
+  {
+      Pixel[] pixels = source.getPixels();
+      int red, green, blue;
+
+      // Iterate through every pixel in the image
+      for (Pixel p : pixels)
+      {
+          // Get the current RGB values
+          red = p.getRed();
+          green = p.getGreen();
+          blue = p.getBlue();
+
+          // Invert each color component
+          p.setRed(255 - red);
+          p.setGreen(255 - green);
+          p.setBlue(255 - blue);
+      }
+  }
 
   /**
    * copy one pic to another pic/canvas
@@ -131,7 +183,6 @@ public class TestPicture17
         if (gray < min) min = gray;
         if (gray > max) max = gray;
      }
-
   }
   public static void shepardFarey(Picture source)
   {
@@ -166,9 +217,4 @@ public class TestPicture17
             }
       }
   }
-        
-
-  
-  
-  
 }//class
