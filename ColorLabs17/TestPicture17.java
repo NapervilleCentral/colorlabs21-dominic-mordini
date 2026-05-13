@@ -22,8 +22,10 @@ public class TestPicture17
     Picture pic = new Picture("images/turtle.jpg");
     Picture pic2 = new Picture("images/turtle.jpg");
     Picture pic3 = new Picture("images/turtle.jpg");
+    Picture pic4 = new Picture("images/turtle.jpg");
     Picture canvas = new Picture("images/posterCanvas.jpg");
     
+    copytoCanvas(pic,canvas,4000,2000);
     grayScale(pic);
     mirrorVertical(pic);
     copytoCanvas(pic,canvas,0,0);
@@ -34,9 +36,8 @@ public class TestPicture17
     upsideDown(pic3);
     invert(pic3);
     copytoCanvas(pic3,canvas,4000,0);
-    
-    
-    
+    recursInfinite(pic4,150,0);
+    copytoCanvas(pic4,canvas,0,2000);
     
     canvas.explore();
         
@@ -217,4 +218,36 @@ public class TestPicture17
             }
       }
   }
+  public static void recursInfinite(Picture source, int x, int y) 
+  {
+      int height = source.getHeight();
+      int width = source.getWidth();
+      if (width <= 1 || height <= 1) 
+      {
+          return;
+      }
+      int innerWidth = width / 2;
+      int innerHeight = height / 2;
+      int innerX = x + (width / 4);
+      int innerY = y + (height / 4);
+      for (int row = 0; row < innerHeight; row++) 
+      {
+          for (int col = 0; col < innerWidth; col++) 
+          {
+              int srcX = col * 2;
+              int srcY = row * 2;
+              Pixel sourcePixel = source.getPixel(srcX, srcY);
+              Color color = sourcePixel.getColor();
+              Pixel targetPixel = source.getPixel(innerX + col, innerY + row);
+              targetPixel.setColor(color);
+          }
+      }
+  }
+
+
+
+
+
+
+
 }//class
