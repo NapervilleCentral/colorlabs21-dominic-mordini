@@ -23,6 +23,7 @@ public class TestPicture17
     Picture pic2 = new Picture("images/turtle.jpg");
     Picture pic3 = new Picture("images/turtle.jpg");
     Picture pic4 = new Picture("images/turtle.jpg");
+    Picture pic5 = new Picture("images/turtle.jpg");
     Picture canvas = new Picture("images/posterCanvas.jpg");
     
     copytoCanvas(pic,canvas,4000,2000);
@@ -38,8 +39,11 @@ public class TestPicture17
     copytoCanvas(pic3,canvas,4000,0);
     recursInfinite(pic4,150,0);
     copytoCanvas(pic4,canvas,0,2000);
-    
+    sepia(pic5);
+    copytoCanvas(pic5,canvas,2000,2000);
     canvas.explore();
+   
+    canvas.write("images/finalPoster.jpg");
         
     
      
@@ -243,11 +247,27 @@ public class TestPicture17
           }
       }
   }
+  public static void sepia(Picture source) 
+  {
+    Pixel[] pixels = source.getPixels();
+    for (Pixel p : pixels) { 
+        
+        int red = p.getRed();
+        int green = p.getGreen();
+        int blue = p.getBlue();
 
+        // Calculate the sepia values using standard transformation weights
+        int newRed = (int)((red * 0.393) + (green * 0.769) + (blue * 0.189));
+        int newGreen = (int)((red * 0.349) + (green * 0.686) + (blue * 0.168));
+        int newBlue = (int)((red * 0.272) + (green * 0.534) + (blue * 0.131));
 
+        // Ensure values do not exceed the 255 color limit 
+        if (newRed > 255) newRed = 255;
+        if (newGreen > 255) newGreen = 255;
+        if (newBlue > 255) newBlue = 255;
 
-
-
-
-
+        // Apply the new sepia color to the pixel 
+        p.setColor(new Color(newRed, newGreen, newBlue));
+    }
+  }      
 }//class
